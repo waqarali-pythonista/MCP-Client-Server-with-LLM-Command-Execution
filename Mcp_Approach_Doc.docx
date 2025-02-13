@@ -1,0 +1,71 @@
+# Approach Document: MCP Client-Server with LLM Command Execution
+
+## 1️⃣ Project Overview
+The **MCP (Model Context Protocol) Client-Server System** integrates with an **LLM (Groq or Ollama)** to dynamically generate and execute system commands. The system consists of three main components:
+- **MCP Client**: Sends user queries and displays execution results.
+- **MCP Server**: Processes the query, generates a command, executes it, and returns results.
+- **LLM Integration**: Uses **Ollama (LLaMA 3.2)** to generate system commands from natural language queries.
+
+## 2️⃣ System Architecture
+The architecture follows a **client-server model**:
+
+1. **MCP Client (Frontend - Streamlit Web App)**
+   - Takes user input (query) via a web interface.
+   - Sends request to **MCP Server** via REST API.
+   - Displays generated command and execution result.
+
+2. **MCP Server (FastAPI Backend)**
+   - Receives query from the client.
+   - Uses **LLM (Ollama)** to generate a shell command.
+   - Ensures the command is **safe** and compatible with the OS.
+   - Executes the command and returns results.
+   - Logs all interactions for debugging & auditing.
+
+## 3️⃣ Key Features
+✅ **Secure Command Execution**
+- Blocks dangerous commands (`rm`, `shutdown`, `format`, etc.).
+- Uses regex-based filtering to prevent injection attacks.
+
+✅ **Cross-Platform Support**
+- Converts Linux commands to Windows equivalents (`ls → dir`).
+- Ensures compatibility for different OS environments.
+
+✅ **Error Handling & Logging**
+- Catches and logs all exceptions.
+- Provides meaningful error messages.
+
+✅ **LLM Integration with Ollama**
+- Uses **Langchain + Ollama (LLaMA 3.2)** for intelligent command generation.
+- Ensures clean command formatting before execution.
+
+✅ **Web-based Frontend (Streamlit)**
+- Simple UI to interact with the system.
+- Displays both **generated command** and **execution output**.
+
+## 4️⃣ Security Considerations 🔐
+- **Input Validation**: Ensures user input is safe before sending to LLM.
+- **Whitelisting**: Restricts execution to **safe** commands only.
+- **Command Sanitization**: Removes special characters and unnecessary formatting.
+- **Logging & Monitoring**: Logs every query, command, and execution result.
+
+## 5️⃣ Deployment Strategy 🚀
+### Local Development:
+- Uses `uvicorn` to run **FastAPI server** locally.
+- The **Streamlit frontend** runs as a separate process.
+- Ollama runs as a local model server.
+
+### Production Deployment:
+- Deploy backend as a containerized FastAPI service (Docker).
+- Use **Gunicorn + Uvicorn workers** for scalability.
+- Host the frontend on **Streamlit Cloud or a FastAPI web UI**.
+- Ensure **HTTPS & authentication** for security.
+
+## 6️⃣ Next Steps 🔄
+- ✅ **Automated Testing**: Add test cases for different OS environments.
+- ✅ **Enhance LLM Accuracy**: Fine-tune command generation.
+- ✅ **Improve UI/UX**: Add real-time logs, command history, and error reporting.
+- ✅ **Containerization**: Provide a Dockerfile for easy deployment.
+
+
+
+
