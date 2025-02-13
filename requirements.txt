@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+requests
+subprocess
+langchain-core
+langchain-ollama
+streamlit
+pydantic
+logging
+re
+platform
