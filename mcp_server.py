@@ -187,24 +187,30 @@ def execute_command(command: str) -> str:
         return f"Exception: {str(e)}"
 
 # ------------------------- API Endpoint ------------------------- #
-@app.post("/mcp/query", response_model=MCPResponse)
+@app.post("/mcp/query")
 async def process_query(request: MCPRequest):
     """Receives an MCP-compliant query request, generates a system command using LLM, executes it, and returns the result."""
     try:
         if request.protocol != "MCP" or request.version != "1.0":
-            return MCPResponse(
-                session_id=request.session_id,
-                status="error",
-                payload={"error": "Invalid MCP protocol version", "error_code": "400_INVALID_VERSION"},
-            )
+            return {
+                "mcpServers": {
+                    "error": {
+                        "message": "Invalid MCP protocol version",
+                        "error_code": "400_INVALID_VERSION"
+                    }
+                }
+            }
 
         # ✅ Validate message type
-        if request.message_type not in ["query"]:
-            return MCPResponse(
-                session_id=request.session_id,
-                status="error",
-                payload={"error": "Unsupported message type", "error_code": "400_UNSUPPORTED_MESSAGE_TYPE"},
-            )
+        if request.message_type != "query":
+            return {
+                "mcpServers": {
+                    "error": {
+                        "message": "Unsupported message type",
+                        "error_code": "400_UNSUPPORTED_MESSAGE_TYPE"
+                    }
+                }
+            }
 
         user_query = request.payload.get("query", "").strip()
         logging.info(f"Received Query: {user_query}")
@@ -216,20 +222,33 @@ async def process_query(request: MCPRequest):
 
         logging.info(f"Generated Command: {generated_command}")
 
+        # Extract command and arguments
+        command_parts = generated_command.split(" ")
+        command_name = command_parts[0]
+        command_args = command_parts[1:] if len(command_parts) > 1 else []
+
         # Execute the generated command
         execution_result = execute_command(generated_command)
         logging.info(f"Execution Result: {execution_result}")
 
-        return MCPResponse(
-            session_id=request.session_id,
-            status="success",
-            payload={"command": generated_command, "result": execution_result},
-        )
+        return {
+            "mcpServers": {
+                "commandExecution": {
+                    "command": command_name,
+                    "args": command_args,
+                    "output": execution_result
+                }
+            }
+        }
 
     except Exception as e:
         logging.error(f"Error processing query: {str(e)}")
-        return MCPResponse(
-            session_id=request.session_id,
-            status="error",
-            payload={"error": "Internal Server Error", "error_code": "500_INTERNAL_SERVER_ERROR"},
-        )
+        return {
+            "mcpServers": {
+                "error": {
+                    "message": "Internal Server Error",
+                    "error_code": "500_INTERNAL_SERVER_ERROR"
+                }
+            }
+        }
+

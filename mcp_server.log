@@ -527,3 +527,50 @@ operable program or batch file.
 14/02/2025  04:47 am    <DIR>          __pycache__
                6 File(s)         62,763 bytes
                3 Dir(s)  18,204,258,304 bytes free
+2025-02-18 16:47:35,969 - INFO - Received Query: List all files in the current directory
+2025-02-18 16:47:36,421 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+2025-02-18 16:47:36,422 - ERROR - Error processing query: model requires more system memory (3.5 GiB) than is available (1.6 GiB) (status code: 500)
+2025-02-18 16:49:34,459 - INFO - Received Query: List all files in the current directory
+2025-02-18 16:49:34,555 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+2025-02-18 16:49:34,555 - ERROR - Error processing query: model requires more system memory (3.5 GiB) than is available (1.7 GiB) (status code: 500)
+2025-02-18 16:50:13,198 - INFO - Received Query: List all files in the current directory
+2025-02-18 16:50:13,265 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+2025-02-18 16:50:13,266 - ERROR - Error processing query: model requires more system memory (3.5 GiB) than is available (1.9 GiB) (status code: 500)
+2025-02-18 16:51:50,586 - INFO - Received Query: List all files in the current directory
+2025-02-18 16:51:58,848 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-02-18 16:52:00,464 - INFO - Generated Command: dir
+2025-02-18 16:52:00,556 - INFO - Execution Result: Volume in drive C is Windows
+ Volume Serial Number is 1607-B7ED
+
+ Directory of C:\Users\aliw9\OneDrive\Desktop\Testing\Gen AI - AI\NewProject
+
+13/02/2025  06:52 am    <DIR>          .
+17/02/2025  02:54 am    <DIR>          ..
+13/02/2025  06:49 am             3,108 Mcp_Approach_Doc.docx
+18/02/2025  04:46 pm             4,136 mcp_client.py
+18/02/2025  04:50 pm            44,394 mcp_server.log
+18/02/2025  04:44 pm             9,956 mcp_server.py
+13/02/2025  06:41 am             5,240 README.md
+13/02/2025  06:52 am               118 requirements.txt
+18/02/2025  04:44 pm    <DIR>          __pycache__
+               6 File(s)         66,952 bytes
+               3 Dir(s)  19,108,864,000 bytes free
+2025-02-18 17:02:30,992 - INFO - Received Query: List all files in the current directory
+2025-02-18 17:02:40,054 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-02-18 17:02:41,503 - INFO - Generated Command: dir
+2025-02-18 17:02:41,560 - INFO - Execution Result: Volume in drive C is Windows
+ Volume Serial Number is 1607-B7ED
+
+ Directory of C:\Users\aliw9\OneDrive\Desktop\Testing\Gen AI - AI\NewProject
+
+13/02/2025  06:52 am    <DIR>          .
+17/02/2025  02:54 am    <DIR>          ..
+13/02/2025  06:49 am             3,108 Mcp_Approach_Doc.docx
+18/02/2025  04:46 pm             4,136 mcp_client.py
+18/02/2025  04:52 pm            45,415 mcp_server.log
+18/02/2025  05:02 pm             9,494 mcp_server.py
+13/02/2025  06:41 am             5,240 README.md
+13/02/2025  06:52 am               118 requirements.txt
+18/02/2025  04:44 pm    <DIR>          __pycache__
+               6 File(s)         67,511 bytes
+               3 Dir(s)  19,132,563,456 bytes free
